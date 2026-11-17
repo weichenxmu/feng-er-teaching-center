@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>嵌入式（51单片机）- 凤儿老师的教学资源中心</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Microsoft YaHei", Arial, sans-serif;
+  color: #172b4d;
+  background: #fff;
+}
+header {
+  max-width: 1100px;
+  margin: auto;
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+header h2 { font-size: 20px; margin: 0; }
+nav a {
+  color: #475569;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 14px;
+}
+main {
+  max-width: 1000px;
+  margin: 42px auto;
+  padding: 0 24px;
+}
+.back {
+  color: #3974b8;
+  text-decoration: none;
+  font-size: 14px;
+}
+.hero {
+  background: #f3f7fc;
+  padding: 35px;
+  border-radius: 14px;
+  margin-top: 22px;
+}
+.tag { color: #3974b8; font-size: 13px; }
+h1 { font-size: 32px; margin: 14px 0; }
+.hero p {
+  color: #64748b;
+  line-height: 1.9;
+  font-size: 15px;
+}
+.section { margin-top: 42px; }
+.section h2 { font-size: 22px; margin-bottom: 20px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.card {
+  border: 1px solid #e5eaf0;
+  border-radius: 12px;
+  padding: 22px;
+}
+.card h3 { margin: 10px 0; font-size: 17px; }
+.card p {
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.icon { font-size: 25px; }
+.chapter {
+  border: 1px solid #e5eaf0;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.chapter summary {
+  padding: 19px;
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.chapter summary::-webkit-details-marker { display:none; }
+.chapter summary::after {
+  content: "+";
+  color: #3974b8;
+  font-size: 20px;
+}
+.chapter[open] summary::after { content: "−"; }
+.chapter-content {
+  padding: 0 20px 20px;
+  border-top: 1px solid #eee;
+}
+.chapter-content p {
+  color: #64748b;
+  font-size: 14px;
+}
+.resource {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+  gap: 12px;
+}
+.pending {
+  color: #94a3b8;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.note {
+  background: #f8fafc;
+  padding: 18px;
+  border-radius: 10px;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.8;
+}
+footer {
+  text-align: center;
+  color: #94a3b8;
+  padding: 35px 15px;
+  border-top: 1px solid #eee;
+  font-size: 13px;
+}
+@media(max-width:600px) {
+  header { padding: 18px 15px; }
+  header h2 { font-size: 16px; }
+  nav a { margin-left: 9px; font-size: 12px; }
+  main { padding: 0 16px; }
+  .hero { padding: 24px; }
+  h1 { font-size: 26px; }
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h2>凤儿老师的教学资源中心</h2>
+  <nav>
+    <a href="../index.html">首页</a>
+    <a href="#chapters">课程章节</a>
+  </nav>
+</header>
+
+<main>
+
+<a class="back" href="../index.html">← 返回课程中心</a>
+
+<section class="hero">
+  <span class="tag">COURSE 03 · EMBEDDED SYSTEM</span>
+  <h1>嵌入式系统（51单片机）</h1>
+  <p>
+    从单片机基础出发，学习C语言程序设计、硬件接口、
+    定时器、中断及串行通信等核心知识。
+    通过实验与综合项目，掌握嵌入式系统软硬件设计的基本方法。
+  </p>
+</section>
+
+<section class="section">
+  <h2>课程资源</h2>
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon">📚</div>
+      <h3>教学课件</h3>
+      <p>课程PPT、课堂讲义、知识点总结。</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔬</div>
+      <h3>实验指导</h3>
+      <p>实验任务、硬件连接、操作步骤及实验要求。</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">💻</div>
+      <h3>程序代码</h3>
+      <p>Keil工程、C语言示例程序及参考代码。</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🚀</div>
+      <h3>拓展学习</h3>
+      <p>Proteus仿真、综合设计及自主学习资料。</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="section" id="chapters">
+  <h2>课程章节与学习资料</h2>
+  <p style="color:#64748b;font-size:14px">
+    点击章节名称，展开对应的教学资源。
+  </p>
+
+  <details class="chapter">
+    <summary>第1章 51单片机基础与开发环境</summary>
+    <div class="chapter-content">
+      <p>了解51单片机的基本结构、引脚功能和开发环境。</p>
+      <div class="resource">教学PPT <span class="pending">待上传</span></div>
+      <div class="resource">实验指导书 <span class="pending">待上传</span></div>
+      <div class="resource">程序代码 <span class="pending">待上传</span></div>
+      <div class="resource">拓展资料 <span class="pending">待上传</span></div>
+    </div>
+  </details>
+
+  <details class="chapter">
+    <summary>第2章 51单片机C语言程序设计</summary>
+    <div class="chapter-content">
+      <p>学习变量、数据类型、运算符、流程控制和函数。</p>
+      <div class="resource">教学PPT <span class="pending">待上传</span></div>
+      <div class="resource">实验指导书 <span class="pending">待上传</span></div>
+      <div class="resource">程序代码 <span class="pending">待上传</span></div>
+      <div class="resource">拓展资料 <span class="pending">待上传</span></div>
+    </div>
+  </details>
+
+  <details class="chapter">
+    <summary>第3章 GPIO与LED控制</summary>
+    <div class="chapter-content">
+      <p>掌握I/O口工作方式、LED控制及流水灯设计。</p>
+      <div class="resource">教学PPT <span class="pending">待上传</span></div>
+      <div class="resource">实验指导书 <span class="pending">待上传</span></div>
+      <div class="resource">程序代码 <span class="pending">待上传</span></div>
+      <div class="resource">拓展资料 <span class="pending">待上传</span></div>
+    </div>
+  </details>
+
+  <details class="chapter">
+    <summary>第4章 数码管与LCD显示</summary>
+    <div class="chapter-content">
+      <p>学习数码管动态与静态显示、LCD显示控制。</p>
+      <div class="resource">教学PPT <span class="pending">待上传</span></div>
+      <div class="resource">实验指导书 <span class="pending">待上传</span></div>
+      <div class="resource">程序代码 <span class="pending">待上传</span></div>
+      <div class="resource">拓展资料 <span class="pending">待上传</span></div>
+    </div>
+  </details>
+
+  <details class="chapter">
+    <summary>第5章 定时器与计数器</summary>
+    <div class="chapter-content">
+      <p>学习定时器工作原理、工作方式及定时程序设计。</p>
+      <div class="resource">教学PPT <span class="pending">待上传</span></div>
+      <div class="resource">实验指导书 <span class="pending">待上传</span></div>
+      <div class="resource">程序代码 <span class="pending">待上传</span></div>
+      <div class="resource">拓展资料 <span class="pending">待上传</span></div>
+    </div>
+  </details>
+
+  <details class="chapter">
+    <summary>第6章 中断系统</summary>
+    <div class="chapter-content">
+      <p>学习中断概念、中断源、中断控制及程序设计。</p>
+      <div class="resource">教学PPT <span class="pending">待上传</span></div>
+      <div class="resource">实验指导书 <span class="pending">待上传</span></div>
+      <div class="resource">程序代码 <span class="pending">待上传</span></div>
+      <div class="resource">拓展资料 <span class="pending">待上传</span></div>
+    </div>
+  </details>
+
+  <details class="chapter">
+    <summary>第7章 矩阵键盘与人机交互</summary>
+    <div class="chapter-content">
+      <p>掌握独立按键、矩阵键盘扫描与按键功能设计。</p>
+      <div class="resource">教学PPT <span class="pending">待上传</span></div>
+      <div class="resource">实验指导书 <span class="pending">待上传</span></div>
+      <div class="resource">程序代码 <span class="pending">待上传</span></div>
+      <div class="resource">拓展资料 <span class="pending">待上传</span></div>
+    </div>
+  </details>
+
+  <details class="chapter">
+    <summary>第8章 串行通信</summary>
+    <div class="chapter-content">
+      <p>学习串口通信原理、波特率设置及数据收发。</p>
+      <div class="resource">教学PPT <span class="pending">待上传</span></div>
+      <div class="resource">实验指导书 <span class="pending">待上传</span></div>
+      <div class="resource">程序代码 <span class="pending">待上传</span></div>
+      <div class="resource">拓展资料 <span class="pending">待上传</span></div>
+    </div>
+  </details>
+
+  <details class="chapter">
+    <summary>第9章 传感器与外设接口</summary>
+    <div class="chapter-content">
+      <p>结合典型传感器和外部模块开展接口应用实践。</p>
+      <div class="resource">教学PPT <span class="pending">待上传</span></div>
+      <div class="resource">实验指导书 <span class="pending">待上传</span></div>
+      <div class="resource">程序代码 <span class="pending">待上传</span></div>
+      <div class="resource">拓展资料 <span class="pending">待上传</span></div>
+    </div>
+  </details>
+
+  <details class="chapter">
+    <summary>第10章 综合项目设计</summary>
+    <div class="chapter-content">
+      <p>综合运用单片机知识，完成软硬件系统设计与调试。</p>
+      <div class="resource">项目任务书 <span class="pending">待上传</span></div>
+      <div class="resource">设计指导书 <span class="pending">待上传</span></div>
+      <div class="resource">参考程序 <span class="pending">待上传</span></div>
+      <div class="resource">作品展示 <span class="pending">待上传</span></div>
+    </div>
+  </details>
+
+</section>
+
+<section class="section">
+  <h2>学习建议</h2>
+  <div class="note">
+    学习单片机不能只停留在阅读课件和理解程序。
+    建议同学们坚持“理论学习—程序编写—硬件调试—现象分析—项目拓展”的学习过程。
+    遇到问题时，先独立分析，再查阅资料，逐步培养嵌入式系统设计与实践能力。
+  </div>
+</section>
+
+</main>
+
+<footer>
+  凤儿老师的教学资源中心<br><br>
+  嵌入式系统（51单片机）课程资源页面
+</footer>
+
+</body>
+</html>
