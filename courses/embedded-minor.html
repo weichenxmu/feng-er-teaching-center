@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>嵌入式微专业 | 凤儿老师的教学资源中心</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:"Microsoft YaHei",Arial,sans-serif;
+ color:#263449;
+ background:#fff;
+}
+header{
+ height:62px;
+ position:fixed;
+ top:0;left:0;right:0;
+ z-index:10;
+ background:#fff;
+ border-bottom:1px solid #e5eaf0;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 25px;
+}
+.brand{font-size:18px;font-weight:700}
+.header-right a{
+ color:#64748b;text-decoration:none;
+ margin-left:18px;font-size:14px;
+}
+.menu-btn{
+ display:none;border:0;background:none;
+ font-size:23px;cursor:pointer;
+}
+.sidebar{
+ position:fixed;
+ top:62px;bottom:0;left:0;
+ width:260px;
+ overflow-y:auto;
+ padding:25px 18px;
+ border-right:1px solid #e5eaf0;
+ background:#fafbfd;
+}
+.nav-title{
+ font-size:12px;
+ color:#94a3b8;
+ margin:20px 10px 8px;
+}
+.nav-link{
+ display:block;
+ padding:10px 12px;
+ margin:3px 0;
+ border-radius:7px;
+ text-decoration:none;
+ color:#526174;
+ font-size:14px;
+ cursor:pointer;
+}
+.nav-link:hover,.nav-link.active{
+ background:#eaf2fc;
+ color:#3974b8;
+ font-weight:600;
+}
+.nav-sub{padding-left:12px}
+main{
+ margin-left:260px;
+ padding:100px 55px 60px;
+ max-width:1100px;
+}
+.hero{
+ padding:35px;
+ background:#f1f6fc;
+ border-radius:13px;
+ margin-bottom:38px;
+}
+.hero small{color:#3974b8;font-weight:bold}
+.hero h1{font-size:32px;margin:15px 0}
+.hero p{color:#64748b;line-height:1.9}
+section{
+ padding-top:15px;
+ margin-bottom:55px;
+ scroll-margin-top:85px;
+}
+h2{
+ font-size:24px;
+ padding-bottom:13px;
+ border-bottom:1px solid #e8edf2;
+}
+h3{font-size:17px;margin-top:25px}
+.desc{color:#64748b;font-size:14px;line-height:1.9}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:15px;
+ margin-top:20px;
+}
+.card{
+ border:1px solid #e5eaf0;
+ border-radius:10px;
+ padding:20px;
+ background:white;
+}
+.card h3{margin:0 0 10px}
+.card p{
+ font-size:13px;color:#64748b;line-height:1.8;
+}
+.resource-link{
+ display:inline-block;
+ margin-top:8px;
+ padding:8px 13px;
+ border:1px solid #dce5f0;
+ border-radius:6px;
+ text-decoration:none;
+ color:#3974b8;
+ font-size:13px;
+}
+.pending{
+ display:inline-block;
+ font-size:11px;
+ color:#94a3b8;
+ background:#f1f5f9;
+ padding:4px 8px;
+ border-radius:5px;
+}
+.code-box{
+ background:#f6f8fa;
+ padding:17px;
+ border-radius:8px;
+ overflow-x:auto;
+ font-family:Consolas,monospace;
+ font-size:13px;
+ line-height:1.8;
+}
+.tip{
+ background:#f1f6fc;
+ border-left:3px solid #3974b8;
+ padding:15px;
+ border-radius:5px;
+ color:#526174;
+ font-size:14px;
+ line-height:1.8;
+ margin-top:18px;
+}
+footer{
+ border-top:1px solid #e5eaf0;
+ padding:30px 0;
+ text-align:center;
+ color:#94a3b8;
+ font-size:13px;
+}
+@media(max-width:800px){
+ .menu-btn{display:block}
+ .header-right{display:none}
+ .sidebar{
+  width:260px;
+  transform:translateX(-100%);
+  transition:.25s;
+  z-index:9;
+ }
+ .sidebar.open{transform:translateX(0)}
+ main{margin-left:0;padding:90px 20px 40px}
+ .grid{grid-template-columns:1fr}
+ .hero{padding:25px}
+ .hero h1{font-size:26px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="brand">凤儿老师的教学资源中心</div>
+ <div class="header-right">
+  <a href="../index.html">首页</a>
+  <a href="#overview">课程介绍</a>
+ </div>
+ <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</header>
+
+<aside class="sidebar" id="sidebar">
+
+ <div class="nav-title">课程导航</div>
+ <a class="nav-link active" href="#overview">课程介绍</a>
+
+ <div class="nav-title">📦 资料包</div>
+ <a class="nav-link" href="#software">软件安装包</a>
+ <a class="nav-link" href="#hardware">小车硬件参考</a>
+ <a class="nav-link" href="#manual">学习手册</a>
+
+ <div class="nav-title">💻 例程</div>
+ <a class="nav-link" href="#led">01 点灯实验</a>
+ <a class="nav-link" href="#oled">02 OLED显示</a>
+ <a class="nav-link" href="#bluetooth">03 蓝牙串口</a>
+ <a class="nav-link" href="#pwm">04 PWM控制电机</a>
+ <a class="nav-link" href="#car">05 蓝牙小车</a>
+ <a class="nav-link" href="#tracking">06 红外寻迹</a>
+ <a class="nav-link" href="#ircar">07 红外小车</a>
+
+</aside>
+
+<main>
+
+<section class="hero" id="overview">
+ <small>EMBEDDED SYSTEM · PRACTICE COURSE</small>
+ <h1>嵌入式微专业</h1>
+ <p>
+ 基于STM32的嵌入式系统设计与实践。
+ 以智能蓝牙小车为综合项目，围绕嵌入式软件开发、
+ 硬件接口设计、电机控制、无线通信及智能感知等内容，
+ 逐步完成从基础实验到综合项目的学习。
+ </p>
+ <div class="tip">
+  <strong>学习路线：</strong>
+  基础入门 → 外设驱动 → 通信控制 → 电机控制 →
+  蓝牙小车 → 红外感知 → 综合项目
+ </div>
+</section>
+
+<!-- 资料包 -->
+
+<section id="software">
+ <h2>📦 一、资料包</h2>
+ <h3>1. 软件安装包</h3>
+ <p class="desc">提供课程开发、程序下载及调试所需的软件工具。</p>
+ <div class="grid">
+  <div class="card">
+   <h3>Keil MDK</h3>
+   <p>STM32嵌入式程序开发环境。</p>
+   <span class="pending">待上传</span>
+  </div>
+  <div class="card">
+   <h3>STM32CubeMX</h3>
+   <p>STM32外设配置及初始化代码生成工具。</p>
+   <span class="pending">待上传</span>
+  </div>
+  <div class="card">
+   <h3>串口调试助手</h3>
+   <p>用于蓝牙串口通信和数据收发测试。</p>
+   <span class="pending">待上传</span>
+  </div>
+  <div class="card">
+   <h3>程序下载工具</h3>
+   <p>用于STM32程序烧录和调试。</p>
+   <span class="pending">待上传</span>
+  </div>
+ </div>
+</section>
+
+<section id="hardware">
+ <h2>2. 小车硬件参考</h2>
+ <p class="desc">整理STM32蓝牙小车涉及的硬件资料，帮助学生理解系统组成和电路连接。</p>
+ <div class="grid">
+  <div class="card">
+   <h3>STM32主控板</h3>
+   <p>主控板原理图、引脚定义、接口说明。</p>
+   <span class="pending">待上传</span>
+  </div>
+  <div class="card">
+   <h3>电机驱动模块</h3>
+   <p>驱动电路、接线方式、电机接口说明。</p>
+   <span class="pending">待上传</span>
+  </div>
+  <div class="card">
+   <h3>蓝牙通信模块</h3>
+   <p>蓝牙模块引脚、串口连接及通信说明。</p>
+   <span class="pending">待上传</span>
+  </div>
+  <div class="card">
+   <h3>红外寻迹模块</h3>
+   <p>红外传感器接口、检测原理及安装说明。</p>
+   <span class="pending">待上传</span>
+  </div>
+  <div class="card">
+   <h3>OLED显示模块</h3>
+   <p>显示屏接口定义、供电及通信连接。</p>
+   <span class="pending">待上传</span>
+  </div>
+  <div class="card">
+   <h3>智能小车整体结构</h3>
+   <p>底盘结构、供电方案、模块布局及接线参考。</p>
+   <span class="pending">待上传</span>
+  </div>
+ </div>
+</section>
+
+<section id="manual">
+ <h2>3. 学习手册</h2>
+ <p class="desc">围绕课程知识点整理学习资料，帮助学生课前预习、课中实践和课后拓展。</p>
+ <div class="grid">
+  <div class="card">
+   <h3>STM32基础入门</h3>
+   <p>STM32基本结构、开发环境和工程创建。</p>
+   <span class="pending">待上传</span>
+  </div>
+  <div class="card">
+   <h3>GPIO输入输出</h3>
+   <p>GPIO工作模式、引脚配置及数字信号控制。</p>
+   <span class="pending">待上传</span>
+  </div>
+  <div class="card">
+   <h3>定时器与PWM</h3>
+   <p>定时器原理、PWM波形及占空比调节。</p>
+   <span class="pending">待上传</span>
+  </div>
+  <div class="card">
+   <h3>USART串口通信</h3>
+   <p>串口参数配置、数据收发及通信协议。</p>
+   <span class="pending">待上传</span>
+  </div>
+  <div class="card">
+   <h3>传感器与智能感知</h3>
+   <p>红外传感器检测原理及数据处理。</p>
+   <span class="pending">待上传</span>
+  </div>
+  <div class="card">
+   <h3>智能小车综合设计</h3>
+   <p>系统设计、模块集成、调试与优化。</p>
+   <span class="pending">待上传</span>
+  </div>
+ </div>
+</section>
+
+<!-- 例程 -->
+
+<section id="led">
+ <h2>💻 二、例程</h2>
+ <h3>01 点灯实验</h3>
+ <p class="desc">学习STM32 GPIO输出配置，完成LED亮灭控制，理解程序编译、下载及硬件调试流程。</p>
+ <div class="card">
+  <p><strong>学习内容：</strong>GPIO输出模式、引脚配置、延时控制。</p>
+  <p><strong>实践任务：</strong>实现LED点亮、熄灭及闪烁。</p>
+  <span class="pending">程序及实验资料待上传</span>
+ </div>
+</section>
+
+<section id="oled">
+ <h2>02 OLED显示</h2>
+ <p class="desc">学习OLED显示模块的接口和驱动方法，实现字符、数字及状态信息显示。</p>
+ <div class="card">
+  <p><strong>学习内容：</strong>OLED接口、初始化、字符显示及数据刷新。</p>
+  <p><strong>实践任务：</strong>显示姓名、课程信息和小车运行状态。</p>
+  <span class="pending">程序及实验资料待上传</span>
+ </div>
+</section>
+
+<section id="bluetooth">
+ <h2>03 蓝牙串口通信</h2>
+ <p class="desc">通过USART串口与蓝牙模块连接，实现无线数据收发。</p>
+ <div class="card">
+  <p><strong>学习内容：</strong>USART配置、串口中断、接收缓冲区和数据解析。</p>
+  <p><strong>实践任务：</strong>通过手机发送字符，控制STM32执行相应操作。</p>
+  <span class="pending">程序及实验资料待上传</span>
+ </div>
+</section>
+
+<section id="pwm">
+ <h2>04 PWM控制电机</h2>
+ <p class="desc">利用STM32定时器产生PWM信号，实现电机速度调节。</p>
+ <div class="card">
+  <p><strong>学习内容：</strong>定时器、PWM频率、占空比和电机驱动。</p>
+  <p><strong>实践任务：</strong>调节PWM占空比，观察电机转速变化。</p>
+  <span class="pending">程序及实验资料待上传</span>
+ </div>
+</section>
+
+<section id="car">
+ <h2>05 蓝牙小车</h2>
+ <p class="desc">综合GPIO、电机驱动、PWM和蓝牙串口通信，完成无线遥控小车。</p>
+ <div class="card">
+  <p><strong>学习内容：</strong>运动控制、蓝牙指令解析、左右轮协调控制。</p>
+  <p><strong>实践任务：</strong>实现前进、后退、左转、右转和停止。</p>
+  <span class="pending">完整工程及实验资料待上传</span>
+ </div>
+</section>
+
+<section id="tracking">
+ <h2>06 红外寻迹</h2>
+ <p class="desc">利用红外传感器识别地面黑白轨迹，实现自动循迹控制。</p>
+ <div class="card">
+  <p><strong>学习内容：</strong>红外检测、数字量读取、传感器状态判断和控制逻辑。</p>
+  <p><strong>实践任务：</strong>实现直线循迹、弯道识别及方向修正。</p>
+  <span class="pending">程序及实验资料待上传</span>
+ </div>
+</section>
+
+<section id="ircar">
+ <h2>07 红外小车</h2>
+ <p class="desc">综合应用红外感知、电机控制和运动控制，实现红外智能小车。</p>
+ <div class="card">
+  <p><strong>学习内容：</strong>传感器与执行机构协同、运动控制及系统调试。</p>
+  <p><strong>实践任务：</strong>完成红外小车综合功能设计与调试。</p>
+  <span class="pending">完整工程及实验资料待上传</span>
+ </div>
+</section>
+
+<footer>
+ 凤儿老师的教学资源中心<br><br>
+ 嵌入式微专业 · STM32系统设计与实践
+</footer>
+
+</main>
+
+<script>
+function toggleMenu(){
+ document.getElementById("sidebar").classList.toggle("open");
+}
+
+const links=document.querySelectorAll(".nav-link");
+links.forEach(link=>{
+ link.addEventListener("click",()=>{
+  links.forEach(item=>item.classList.remove("active"));
+  link.classList.add("active");
+  document.getElementById("sidebar").classList.remove("open");
+ });
+});
+
+const sections=document.querySelectorAll("main section[id]");
+const observer=new IntersectionObserver(entries=>{
+ entries.forEach(entry=>{
+  if(entry.isIntersecting){
+   links.forEach(link=>{
+    link.classList.toggle(
+     "active",
+     link.getAttribute("href")==="#"+entry.target.id
+    );
+   });
+  }
+ });
+},{rootMargin:"-20% 0px -70% 0px"});
+
+sections.forEach(section=>observer.observe(section));
+</script>
+
+</body>
+</html>
+```
+
+## 五、接入网站首页
+
+页面建立完成后，你的网站地址将是：
+
+`https://weichenxmu.github.io/feng-er-teaching-center/courses/embedded-minor.html`
+
+接下来需要在原来的 `index.html` 中找到「嵌入式微专业」课程卡片，将入口设置为：
+
+```html
+<a href="courses/embedded-minor.html">
+  进入嵌入式微专业
+</a>
+```
+
+如果原来已经有嵌入式微专业卡片，只需要修改它的链接，不需要重复添加卡片。
+
+## 六、下一步建议：逐步填充真实课程资源
+
+我建议按这个顺序建设：
+
+<box border radius="lg" padding={3} gap={3}>
+  <title size="lg">嵌入式微专业网站建设计划</title>
+  <list connector="solid" marker="number" gap={3}>
+    <list-item>
+      **第一阶段：网站框架**
+
+      <badge color="success">当前进行中</badge>
+
+      左侧导航、右侧内容、移动端适配。
+    </list-item>
+    <list-item>
+      **第二阶段：资料包**
+
+      上传软件安装包、小车硬件原理图、接线图、学习手册。
+    </list-item>
+    <list-item>
+      **第三阶段：基础例程**
+
+      点灯、OLED显示、蓝牙串口、PWM控制电机。
+    </list-item>
+    <list-item>
+      **第四阶段：综合项目**
+
+      蓝牙小车、红外寻迹、红外小车。
+    </list-item>
+    <list-item>
+      **第五阶段：教学拓展**
+
+      增加实验任务、常见问题、拓展设计和学生项目成果。
+    </list-item>
+  </list>
+</box>
+
+**我建议下一步优先完善「蓝牙小车」这一综合项目。** 你之前的五周嵌入式微专业课程已经围绕蓝牙小车开展实践，我们可以把实际使用的 STM32 工程、硬件连接图、调试记录和拓展任务整理进网站，让它不仅是资料下载站，也是学生完整的项目学习平台。
