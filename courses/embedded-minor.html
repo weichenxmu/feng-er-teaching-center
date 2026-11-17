@@ -220,33 +220,86 @@ footer{
 
 <!-- 资料包 -->
 
+
 <section id="software">
- <h2>📦 一、资料包</h2>
- <h3>1. 软件安装包</h3>
- <p class="desc">提供课程开发、程序下载及调试所需的软件工具。</p>
- <div class="grid">
-  <div class="card">
-   <h3>Keil MDK</h3>
-   <p>STM32嵌入式程序开发环境。</p>
-   <span class="pending">待上传</span>
+  <h2>📦 一、资料包</h2>
+  <h3>1. 软件安装包</h3>
+  <p class="desc">
+    提供嵌入式微专业课程所需的软件开发、
+    串口调试及手机蓝牙通信工具。
+  </p>
+
+  <div class="grid">
+
+    <!-- 1. Keil MDK -->
+    <div class="card">
+      <h3>① Keil MDK</h3>
+      <p>STM32程序编写、编译、下载和调试开发环境。</p>
+      <span class="pending">程序开发工具</span>
+      <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;">
+        <a class="resource-link"
+           href="https://www.keil.com/download/"
+           target="_blank" rel="noopener">
+          🌐 官网下载
+        </a>
+        <a class="resource-link"
+           href="#"
+           download>
+          ⬇ 本站下载
+        </a>
+      </div>
+    </div>
+
+    <!-- 2. STM32CubeMX -->
+    <div class="card">
+      <h3>② STM32CubeMX</h3>
+      <p>STM32引脚配置、时钟配置及外设初始化代码生成工具。</p>
+      <span class="pending">硬件配置工具</span>
+      <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;">
+        <a class="resource-link"
+           href="https://www.st.com/en/development-tools/stm32cubemx.html"
+           target="_blank" rel="noopener">
+          🌐 官网下载
+        </a>
+        <a class="resource-link"
+           href="#"
+           download>
+          ⬇ 本站下载
+        </a>
+      </div>
+    </div>
+
+    <!-- 3. 串口调试助手 -->
+    <div class="card">
+      <h3>③ 串口调试助手</h3>
+      <p>用于STM32串口数据收发、蓝牙模块通信测试及指令调试。</p>
+      <span class="pending">通信调试工具</span>
+      <div style="margin-top:18px;">
+        <a class="resource-link"
+           href="#"
+           download>
+          ⬇ 本站下载
+        </a>
+      </div>
+    </div>
+
+    <!-- 4. 手机蓝牙调试APP -->
+    <div class="card">
+      <h3>④ 手机蓝牙调试 APP</h3>
+      <p>用于手机连接蓝牙模块，发送控制指令，实现小车无线遥控。</p>
+      <span class="pending">手机端调试工具</span>
+      <div style="margin-top:18px;">
+        <a class="resource-link"
+           href="#"
+           download>
+          ⬇ 本站下载
+        </a>
+      </div>
+    </div>
+
   </div>
-  <div class="card">
-   <h3>STM32CubeMX</h3>
-   <p>STM32外设配置及初始化代码生成工具。</p>
-   <span class="pending">待上传</span>
-  </div>
-  <div class="card">
-   <h3>串口调试助手</h3>
-   <p>用于蓝牙串口通信和数据收发测试。</p>
-   <span class="pending">待上传</span>
-  </div>
-  <div class="card">
-   <h3>程序下载工具</h3>
-   <p>用于STM32程序烧录和调试。</p>
-   <span class="pending">待上传</span>
-  </div>
- </div>
 </section>
+
 
 <section id="hardware">
  <h2>2. 小车硬件参考</h2>
