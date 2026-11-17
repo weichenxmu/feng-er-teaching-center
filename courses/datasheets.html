@@ -1,0 +1,581 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>51单片机数据手册库 - 凤儿老师的教学资源中心</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Microsoft YaHei", Arial, sans-serif;
+  background: #f7f9fc;
+  color: #172b4d;
+}
+
+header {
+  background: white;
+  border-bottom: 1px solid #e5eaf0;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: auto;
+  padding: 22px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h2 { margin: 0; font-size: 20px; }
+
+header a {
+  text-decoration: none;
+  color: #3974b8;
+  font-size: 14px;
+}
+
+main {
+  max-width: 1100px;
+  margin: 35px auto;
+  padding: 0 24px;
+}
+
+.hero {
+  background: #edf4fc;
+  padding: 35px;
+  border-radius: 14px;
+  margin-bottom: 28px;
+}
+
+.hero .tag {
+  color: #3974b8;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.hero h1 {
+  font-size: 30px;
+  margin: 15px 0;
+}
+
+.hero p {
+  color: #64748b;
+  line-height: 1.9;
+  font-size: 14px;
+}
+
+.search-box {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #dce3ec;
+  border-radius: 9px;
+  font-size: 15px;
+  outline: none;
+  margin-bottom: 18px;
+}
+
+.search-box:focus {
+  border-color: #3974b8;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 25px;
+}
+
+.filter-btn {
+  border: 1px solid #dce3ec;
+  background: white;
+  padding: 9px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #475569;
+  font-size: 13px;
+}
+
+.filter-btn.active {
+  background: #3974b8;
+  color: white;
+  border-color: #3974b8;
+}
+
+.count {
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.doc-card {
+  background: white;
+  border: 1px solid #e5eaf0;
+  border-radius: 12px;
+  padding: 20px;
+  transition: 0.2s;
+}
+
+.doc-card:hover {
+  border-color: #9bbce2;
+  transform: translateY(-2px);
+}
+
+.doc-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+}
+
+.pdf-icon {
+  font-size: 30px;
+}
+
+.doc-info { flex: 1; }
+
+.doc-info h3 {
+  font-size: 17px;
+  margin: 3px 0 8px;
+}
+
+.doc-info p {
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.category {
+  display: inline-block;
+  background: #edf4fc;
+  color: #3974b8;
+  padding: 4px 9px;
+  border-radius: 5px;
+  font-size: 11px;
+  margin-top: 12px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 19px;
+}
+
+.actions a {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  border-radius: 7px;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.preview {
+  border: 1px solid #3974b8;
+  color: #3974b8;
+}
+
+.download {
+  background: #3974b8;
+  color: white;
+}
+
+.empty {
+  display: none;
+  text-align: center;
+  color: #94a3b8;
+  padding: 45px 10px;
+}
+
+.tips {
+  margin-top: 35px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+footer {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 13px;
+  padding: 35px 15px;
+  margin-top: 40px;
+  background: white;
+}
+
+@media(max-width:650px) {
+  .doc-grid { grid-template-columns: 1fr; }
+  .hero { padding: 24px; }
+  .hero h1 { font-size: 25px; }
+  .header-inner { padding: 18px 15px; }
+  header h2 { font-size: 16px; }
+  main { padding: 0 16px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <h2>凤儿老师的教学资源中心</h2>
+    <a href="51mcu.html">← 返回51单片机课程</a>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <span class="tag">DATASHEETS · TECHNICAL DOCUMENTS</span>
+  <h1>51单片机数据手册库</h1>
+  <p>
+    收集51单片机课程实验和综合项目中常用的芯片、
+    传感器、显示器件及外围电子元器件数据手册。
+    支持资料搜索、在线预览和PDF下载。
+  </p>
+</section>
+
+<input
+  type="text"
+  id="searchInput"
+  class="search-box"
+  placeholder="🔍 搜索器件型号或名称，例如 STC89C52、DS18B20..."
+>
+
+<div class="filters" id="filters">
+  <button class="filter-btn active" data-category="全部">全部资料</button>
+  <button class="filter-btn" data-category="单片机">单片机</button>
+  <button class="filter-btn" data-category="存储器">存储器</button>
+  <button class="filter-btn" data-category="时钟">时钟</button>
+  <button class="filter-btn" data-category="传感器">传感器</button>
+  <button class="filter-btn" data-category="显示器件">显示器件</button>
+  <button class="filter-btn" data-category="逻辑器件">逻辑器件</button>
+  <button class="filter-btn" data-category="外围器件">外围器件</button>
+  <button class="filter-btn" data-category="LED">LED</button>
+</div>
+
+<div class="count" id="count">共15份数据手册</div>
+
+<div class="doc-grid" id="docGrid">
+
+<!-- 单片机 -->
+
+<div class="doc-card" data-category="单片机">
+  <div class="doc-top">
+    <div class="pdf-icon">📕</div>
+    <div class="doc-info">
+      <h3>STC89C52RC</h3>
+      <p>51系列单片机技术资料，包含芯片结构、引脚、定时器、中断及串口等内容。</p>
+      <span class="category">单片机</span>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="preview" href="../resources/51mcu/datasheets/STC89C52RC.pdf" target="_blank" rel="noopener">👁 在线预览</a>
+    <a class="download" href="../resources/51mcu/datasheets/STC89C52RC.pdf" download>↓ 下载PDF</a>
+  </div>
+</div>
+
+<!-- 存储器 -->
+
+<div class="doc-card" data-category="存储器">
+  <div class="doc-top">
+    <div class="pdf-icon">📕</div>
+    <div class="doc-info">
+      <h3>AT24C02</h3>
+      <p>2Kbit EEPROM存储器，学习I²C通信协议和数据读写。</p>
+      <span class="category">存储器</span>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="preview" href="../resources/51mcu/datasheets/AT24C02.pdf" target="_blank" rel="noopener">👁 在线预览</a>
+    <a class="download" href="../resources/51mcu/datasheets/AT24C02.pdf" download>↓ 下载PDF</a>
+  </div>
+</div>
+
+<!-- 时钟 -->
+
+<div class="doc-card" data-category="时钟">
+  <div class="doc-top">
+    <div class="pdf-icon">📕</div>
+    <div class="doc-info">
+      <h3>DS1302Z</h3>
+      <p>实时时钟芯片，学习日期时间管理及三线串行通信。</p>
+      <span class="category">时钟</span>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="preview" href="../resources/51mcu/datasheets/DS1302Z.pdf" target="_blank" rel="noopener">👁 在线预览</a>
+    <a class="download" href="../resources/51mcu/datasheets/DS1302Z.pdf" download>↓ 下载PDF</a>
+  </div>
+</div>
+
+<!-- 传感器 -->
+
+<div class="doc-card" data-category="传感器">
+  <div class="doc-top">
+    <div class="pdf-icon">📕</div>
+    <div class="doc-info">
+      <h3>DS18B20Z</h3>
+      <p>数字温度传感器，学习单总线通信及温度采集。</p>
+      <span class="category">传感器</span>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="preview" href="../resources/51mcu/datasheets/DS18B20Z.pdf" target="_blank" rel="noopener">👁 在线预览</a>
+    <a class="download" href="../resources/51mcu/datasheets/DS18B20Z.pdf" download>↓ 下载PDF</a>
+  </div>
+</div>
+
+<div class="doc-card" data-category="传感器">
+  <div class="doc-top">
+    <div class="pdf-icon">📕</div>
+    <div class="doc-info">
+      <h3>HX720D</h3>
+      <p>24位模数转换芯片，了解传感器微弱信号采集与处理。</p>
+      <span class="category">传感器 / 数据采集</span>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="preview" href="../resources/51mcu/datasheets/HX720D.pdf" target="_blank" rel="noopener">👁 在线预览</a>
+    <a class="download" href="../resources/51mcu/datasheets/HX720D.pdf" download>↓ 下载PDF</a>
+  </div>
+</div>
+
+<!-- 显示器件 -->
+
+<div class="doc-card" data-category="显示器件">
+  <div class="doc-top">
+    <div class="pdf-icon">📕</div>
+    <div class="doc-info">
+      <h3>LCD1602A-5V</h3>
+      <p>字符型液晶显示模块，包含引脚定义、指令集及显示时序。</p>
+      <span class="category">显示器件</span>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="preview" href="../resources/51mcu/datasheets/LCD1602A-5V.pdf" target="_blank" rel="noopener">👁 在线预览</a>
+    <a class="download" href="../resources/51mcu/datasheets/LCD1602A-5V.pdf" download>↓ 下载PDF</a>
+  </div>
+</div>
+
+<div class="doc-card" data-category="显示器件">
+  <div class="doc-top">
+    <div class="pdf-icon">📕</div>
+    <div class="doc-info">
+      <h3>SR420361N</h3>
+      <p>四位数码管器件资料，了解显示器件的电气参数和封装。</p>
+      <span class="category">显示器件</span>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="preview" href="../resources/51mcu/datasheets/SR420361N.pdf" target="_blank" rel="noopener">👁 在线预览</a>
+    <a class="download" href="../resources/51mcu/datasheets/SR420361N.pdf" download>↓ 下载PDF</a>
+  </div>
+</div>
+
+<!-- 逻辑器件 -->
+
+<div class="doc-card" data-category="逻辑器件">
+  <div class="doc-top">
+    <div class="pdf-icon">📕</div>
+    <div class="doc-info">
+      <h3>SN74HC04DR</h3>
+      <p>六路反相器，学习数字逻辑非门及信号反相处理。</p>
+      <span class="category">逻辑器件</span>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="preview" href="../resources/51mcu/datasheets/SN74HC04DR.pdf" target="_blank" rel="noopener">👁 在线预览</a>
+    <a class="download" href="../resources/51mcu/datasheets/SN74HC04DR.pdf" download>↓ 下载PDF</a>
+  </div>
+</div>
+
+<div class="doc-card" data-category="逻辑器件">
+  <div class="doc-top">
+    <div class="pdf-icon">📕</div>
+    <div class="doc-info">
+      <h3>SN74HC32DR</h3>
+      <p>四路二输入或门，学习逻辑运算及组合逻辑电路。</p>
+      <span class="category">逻辑器件</span>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="preview" href="../resources/51mcu/datasheets/SN74HC32DR.pdf" target="_blank" rel="noopener">👁 在线预览</a>
+    <a class="download" href="../resources/51mcu/datasheets/SN74HC32DR.pdf" download>↓ 下载PDF</a>
+  </div>
+</div>
+
+<div class="doc-card" data-category="逻辑器件">
+  <div class="doc-top">
+    <div class="pdf-icon">📕</div>
+    <div class="doc-info">
+      <h3>SN74HC595PW</h3>
+      <p>八位移位寄存器，学习串行输入、并行输出及I/O扩展。</p>
+      <span class="category">逻辑器件</span>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="preview" href="../resources/51mcu/datasheets/SN74HC595PW.pdf" target="_blank" rel="noopener">👁 在线预览</a>
+    <a class="download" href="../resources/51mcu/datasheets/SN74HC595PW.pdf" download>↓ 下载PDF</a>
+  </div>
+</div>
+
+<!-- 外围器件 -->
+
+<div class="doc-card" data-category="外围器件">
+  <div class="doc-top">
+    <div class="pdf-icon">📕</div>
+    <div class="doc-info">
+      <h3>TMB12A05</h3>
+      <p>蜂鸣器器件资料，学习声光报警电路及驱动控制。</p>
+      <span class="category">外围器件</span>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="preview" href="../resources/51mcu/datasheets/TMB12A05.pdf" target="_blank" rel="noopener">👁 在线预览</a>
+    <a class="download" href="../resources/51mcu/datasheets/TMB12A05.pdf" download>↓ 下载PDF</a>
+  </div>
+</div>
+
+<div class="doc-card" data-category="外围器件">
+  <div class="doc-top">
+    <div class="pdf-icon">📕</div>
+    <div class="doc-info">
+      <h3>XBLV321DTR</h3>
+      <p>运算放大器资料，了解模拟信号放大及接口电路设计。</p>
+      <span class="category">外围器件</span>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="preview" href="../resources/51mcu/datasheets/XBLV321DTR.PDF" target="_blank" rel="noopener">👁 在线预览</a>
+    <a class="download" href="../resources/51mcu/datasheets/XBLV321DTR.PDF" download>↓ 下载PDF</a>
+  </div>
+</div>
+
+<!-- LED -->
+
+<div class="doc-card" data-category="LED">
+  <div class="doc-top">
+    <div class="pdf-icon">📕</div>
+    <div class="doc-info">
+      <h3>XL-1608SURC-06</h3>
+      <p>红色贴片LED，了解发光特性、正向电压及限流电阻选型。</p>
+      <span class="category">LED</span>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="preview" href="../resources/51mcu/datasheets/XL-1608SURC-06.pdf" target="_blank" rel="noopener">👁 在线预览</a>
+    <a class="download" href="../resources/51mcu/datasheets/XL-1608SURC-06.pdf" download>↓ 下载PDF</a>
+  </div>
+</div>
+
+<div class="doc-card" data-category="LED">
+  <div class="doc-top">
+    <div class="pdf-icon">📕</div>
+    <div class="doc-info">
+      <h3>XL-1608UBC-04</h3>
+      <p>蓝色贴片LED，查阅器件光电特性及工作参数。</p>
+      <span class="category">LED</span>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="preview" href="../resources/51mcu/datasheets/XL-1608UBC-04.pdf" target="_blank" rel="noopener">👁 在线预览</a>
+    <a class="download" href="../resources/51mcu/datasheets/XL-1608UBC-04.pdf" download>↓ 下载PDF</a>
+  </div>
+</div>
+
+<div class="doc-card" data-category="LED">
+  <div class="doc-top">
+    <div class="pdf-icon">📕</div>
+    <div class="doc-info">
+      <h3>XL-2835SURC-02</h3>
+      <p>2835封装红色LED，查阅封装尺寸及电气参数。</p>
+      <span class="category">LED</span>
+    </div>
+  </div>
+  <div class="actions">
+    <a class="preview" href="../resources/51mcu/datasheets/XL-2835SURC-02.pdf" target="_blank" rel="noopener">👁 在线预览</a>
+    <a class="download" href="../resources/51mcu/datasheets/XL-2835SURC-02.pdf" download>↓ 下载PDF</a>
+  </div>
+</div>
+
+</div>
+
+<div class="empty" id="empty">
+  没有找到相关数据手册，请尝试其他关键词。
+</div>
+
+<section class="tips">
+  <strong>资料使用说明</strong><br>
+  1. 点击「在线预览」可在浏览器中查看PDF文档。<br>
+  2. 点击「下载PDF」可将数据手册保存到本地。<br>
+  3. 进行电路设计时，请重点查阅器件引脚定义、电气参数及接口时序。<br>
+  4. 数据手册为课程学习和实验设计参考资料。
+</section>
+
+</main>
+
+<footer>
+  凤儿老师的教学资源中心<br><br>
+  51单片机课程 · 数据手册专区
+</footer>
+
+<script>
+const searchInput = document.getElementById("searchInput");
+const cards = document.querySelectorAll(".doc-card");
+const buttons = document.querySelectorAll(".filter-btn");
+const count = document.getElementById("count");
+const empty = document.getElementById("empty");
+
+let activeCategory = "全部";
+
+function filterDocs() {
+  const keyword = searchInput.value.toLowerCase().trim();
+  let visible = 0;
+
+  cards.forEach(card => {
+    const text = card.innerText.toLowerCase();
+    const category = card.dataset.category;
+
+    const matchKeyword = text.includes(keyword);
+    const matchCategory =
+      activeCategory === "全部" || category === activeCategory;
+
+    const show = matchKeyword && matchCategory;
+
+    card.style.display = show ? "block" : "none";
+
+    if (show) visible++;
+  });
+
+  count.textContent = "当前显示 " + visible + " 份数据手册";
+  empty.style.display = visible === 0 ? "block" : "none";
+}
+
+searchInput.addEventListener("input", filterDocs);
+
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    buttons.forEach(b => b.classList.remove("active"));
+    button.classList.add("active");
+
+    activeCategory = button.dataset.category;
+    filterDocs();
+  });
+});
+</script>
+
+</body>
+</html>
