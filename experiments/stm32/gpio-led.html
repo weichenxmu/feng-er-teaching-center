@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="STM32F103C8T6 GPIO 点灯实验：CubeMX 配置、HAL 程序、编译下载与故障排查。">
+  <title>01 GPIO 点灯实验 | 凤儿老师的教学资源中心</title>
+  <style>
+    :root {
+      --primary: #3974b8;
+      --primary-dark: #24588f;
+      --primary-soft: #eef5fd;
+      --text: #263449;
+      --muted: #64748b;
+      --line: #e5eaf0;
+      --surface: #f8fafc;
+      --warning: #9a6700;
+      --warning-bg: #fff8df;
+      --success: #166534;
+      --success-bg: #effaf2;
+      --code: #13233a;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background: #fff;
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      line-height: 1.8;
+    }
+
+    a { color: var(--primary); }
+    header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 20;
+      height: 64px;
+      padding: 0 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, .96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+    }
+    .brand { font-size: 18px; font-weight: 700; }
+    .header-links { display: flex; gap: 20px; }
+    .header-links a { color: var(--muted); text-decoration: none; font-size: 14px; }
+    .menu-btn {
+      display: none;
+      border: 0;
+      background: none;
+      color: var(--text);
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    aside {
+      position: fixed;
+      top: 64px;
+      bottom: 0;
+      left: 0;
+      z-index: 15;
+      width: 270px;
+      padding: 24px 18px 38px;
+      overflow-y: auto;
+      background: #fafbfd;
+      border-right: 1px solid var(--line);
+    }
+    .nav-title {
+      margin: 0 10px 10px;
+      color: #94a3b8;
+      font-size: 12px;
+      letter-spacing: .08em;
+    }
+    .nav-link {
+      display: block;
+      margin: 3px 0;
+      padding: 9px 12px;
+      border-radius: 7px;
+      color: #526174;
+      font-size: 13px;
+      text-decoration: none;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--primary);
+      background: #eaf2fc;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 1120px;
+      margin-left: 270px;
+      padding: 98px 54px 70px;
+    }
+    .breadcrumb { margin-bottom: 18px; font-size: 13px; color: var(--muted); }
+    .breadcrumb a { text-decoration: none; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 38px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #edf5fe 0%, #f8fbff 65%, #eef7f7 100%);
+      border: 1px solid #dce9f6;
+    }
+    .hero::after {
+      content: "PC13";
+      position: absolute;
+      right: 28px;
+      bottom: -32px;
+      color: rgba(57, 116, 184, .08);
+      font: 700 92px/1 Consolas, monospace;
+    }
+    .eyebrow { color: var(--primary); font-size: 12px; font-weight: 700; letter-spacing: .08em; }
+    h1 { margin: 10px 0 8px; font-size: 34px; line-height: 1.35; }
+    .lead { max-width: 720px; margin: 0; color: var(--muted); }
+    .meta { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
+    .badge {
+      padding: 5px 10px;
+      border: 1px solid #d6e4f2;
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+      color: #4b6480;
+      font-size: 12px;
+    }
+
+    section { margin-top: 48px; scroll-margin-top: 82px; }
+    h2 {
+      margin: 0 0 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+      font-size: 23px;
+      line-height: 1.5;
+    }
+    h3 { margin: 24px 0 10px; font-size: 17px; }
+    p { margin: 10px 0; }
+    .muted { color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
+    .card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: #fff;
+    }
+    .card h3 { margin: 0 0 9px; }
+    .card p:last-child { margin-bottom: 0; }
+    .check-list, .step-list { padding-left: 22px; }
+    .check-list li, .step-list li { margin: 8px 0; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 12px 14px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { background: var(--surface); color: #40526a; }
+    .table-wrap { overflow-x: auto; border-radius: 10px; }
+
+    .tip, .warning, .success {
+      margin: 18px 0;
+      padding: 15px 17px;
+      border-left: 4px solid var(--primary);
+      border-radius: 7px;
+      background: var(--primary-soft);
+      color: #405875;
+      font-size: 14px;
+    }
+    .warning { border-color: #d69e00; background: var(--warning-bg); color: #765500; }
+    .success { border-color: #34a853; background: var(--success-bg); color: var(--success); }
+
+    .code-wrap { position: relative; margin: 14px 0 20px; }
+    pre {
+      margin: 0;
+      padding: 20px;
+      overflow-x: auto;
+      border-radius: 10px;
+      background: var(--code);
+      color: #e7edf6;
+      font: 13px/1.75 Consolas, "Courier New", monospace;
+      tab-size: 2;
+    }
+    code { font-family: Consolas, "Courier New", monospace; }
+    :not(pre) > code {
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: #f0f4f8;
+      color: #24588f;
+      font-size: .92em;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 6px 10px;
+      border: 1px solid #40536e;
+      border-radius: 6px;
+      color: #dce7f5;
+      background: #1d304a;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    details {
+      margin: 10px 0;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      overflow: hidden;
+    }
+    summary { padding: 15px 17px; cursor: pointer; font-weight: 600; background: #fff; }
+    details[open] summary { background: var(--surface); border-bottom: 1px solid var(--line); }
+    .answer { padding: 4px 17px 15px; color: var(--muted); font-size: 14px; }
+
+    .download-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px;
+      border: 1px solid #d9e6f3;
+      border-radius: 12px;
+      background: #f6faff;
+    }
+    .download-box h3 { margin: 0 0 6px; }
+    .button {
+      display: inline-block;
+      flex: 0 0 auto;
+      padding: 10px 16px;
+      border-radius: 7px;
+      color: #fff;
+      background: var(--primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .button:hover { background: var(--primary-dark); }
+    .source-list { padding-left: 22px; }
+    .source-list li { margin: 8px 0; }
+
+    footer {
+      margin-top: 58px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+      color: #94a3b8;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 860px) {
+      .menu-btn { display: block; }
+      .header-links { display: none; }
+      aside { transform: translateX(-100%); transition: transform .22s ease; box-shadow: 8px 0 24px rgba(15, 23, 42, .08); }
+      aside.open { transform: translateX(0); }
+      main { margin-left: 0; padding: 90px 20px 45px; }
+      .grid { grid-template-columns: 1fr; }
+      .hero { padding: 27px 24px; }
+      .hero::after { display: none; }
+      h1 { font-size: 27px; }
+      .download-box { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">凤儿老师的教学资源中心</div>
+    <div class="header-links">
+      <a href="../../index.html">首页</a>
+      <a href="../../courses/embedded-minor.html">嵌入式微专业</a>
+      <a href="#download">工程下载</a>
+    </div>
+    <button class="menu-btn" type="button" aria-label="打开实验导航" aria-expanded="false" onclick="toggleMenu()">☰</button>
+  </header>
+
+  <aside id="sidebar" aria-label="实验目录">
+    <div class="nav-title">GPIO 点灯实验</div>
+    <a class="nav-link active" href="#objectives">1. 实验目标</a>
+    <a class="nav-link" href="#requirements">2. 软硬件与开发板</a>
+    <a class="nav-link" href="#wiring">3. 引脚连接表</a>
+    <a class="nav-link" href="#cubemx">4. CubeMX 配置</a>
+    <a class="nav-link" href="#code">5. 程序与关键代码</a>
+    <a class="nav-link" href="#build">6. 编译和下载</a>
+    <a class="nav-link" href="#result">7. 预期实验现象</a>
+    <a class="nav-link" href="#troubleshooting">8. 常见问题与排查</a>
+    <a class="nav-link" href="#challenge">9. 提高任务</a>
+    <a class="nav-link" href="#download">10. 工程下载与版本</a>
+    <a class="nav-link" href="#references">11. 参考资料与声明</a>
+  </aside>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../../courses/embedded-minor.html">嵌入式微专业</a> / 例程 / GPIO 点灯实验
+    </div>
+
+    <div class="hero">
+      <span class="eyebrow">EXPERIMENT 01 · STM32 GPIO</span>
+      <h1>GPIO 点灯实验</h1>
+      <p class="lead">使用 STM32F103C8T6 的 PC13 引脚控制板载 LED 周期性亮灭，完成从 CubeMX 配置、HAL 程序编写到 Keil 编译下载的完整流程。</p>
+      <div class="meta">
+        <span class="badge">难度：入门</span>
+        <span class="badge">建议课时：1 学时</span>
+        <span class="badge">芯片：STM32F103C8T6</span>
+        <span class="badge">HAL 库：STM32CubeF1 V1.8.7</span>
+      </div>
+    </div>
+
+    <section id="objectives">
+      <h2>1. 实验目标</h2>
+      <ul class="check-list">
+        <li>认识 STM32 GPIO 的输出功能，理解推挽输出、高低电平和输出速度等基本概念。</li>
+        <li>能够在 STM32CubeMX 中选择芯片并将 PC13 配置为 GPIO 输出。</li>
+        <li>掌握 <code>HAL_GPIO_TogglePin()</code> 和 <code>HAL_Delay()</code> 的基本使用方法。</li>
+        <li>能够使用 Keil MDK 完成工程编译，并通过 ST-Link 将程序下载到开发板。</li>
+        <li>能够根据 LED 现象排查供电、接线、下载器和程序配置问题。</li>
+      </ul>
+    </section>
+
+    <section id="requirements">
+      <h2>2. 所需软硬件与适用开发板</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>硬件</h3>
+          <ul class="check-list">
+            <li>STM32F103C8T6 最小系统板或采用该芯片的课程开发板</li>
+            <li>板载 LED 连接至 PC13 的开发板</li>
+            <li>ST-Link V2 下载器及杜邦线</li>
+            <li>USB 供电线（按开发板接口选择）</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>软件</h3>
+          <ul class="check-list">
+            <li>STM32CubeMX 6.17.0</li>
+            <li>STM32CubeF1 固件包 V1.8.7</li>
+            <li>Keil µVision 5.36</li>
+            <li>Arm Compiler 5.06 update 7</li>
+            <li>ST-Link 驱动程序</li>
+          </ul>
+        </div>
+      </div>
+      <div class="warning"><strong>适用性说明：</strong>本实验依据参考工程中的 STM32F103C8T6 和 PC13 编写。若你的开发板 LED 接在 PB0、PA8 等其他引脚，应在 CubeMX 和程序中同步修改端口与引脚。</div>
+    </section>
+
+    <section id="wiring">
+      <h2>3. 引脚连接表</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>功能</th><th>STM32 引脚</th><th>连接对象</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>LED 控制</td><td>PC13</td><td>板载 LED</td><td>多数 STM32F103C8T6 最小系统板为低电平点亮，无需额外接线。</td></tr>
+            <tr><td>调试数据</td><td>PA13 / SWDIO</td><td>ST-Link SWDIO</td><td>用于 SWD 程序下载与调试。</td></tr>
+            <tr><td>调试时钟</td><td>PA14 / SWCLK</td><td>ST-Link SWCLK</td><td>用于 SWD 时钟信号。</td></tr>
+            <tr><td>公共地</td><td>GND</td><td>ST-Link GND</td><td>开发板和下载器必须共地。</td></tr>
+            <tr><td>目标板供电</td><td>3.3V</td><td>3.3V 电源</td><td>只使用可靠的 3.3V 供电；避免同时接入两路电源。</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tip"><strong>板载 LED 逻辑：</strong>常见“Blue Pill”板的 PC13 LED 为低电平点亮、高电平熄灭。本实验使用翻转函数，因此不影响闪烁效果，但判断初始亮灭状态时需要注意。</div>
+    </section>
+
+    <section id="cubemx">
+      <h2>4. STM32CubeMX 配置步骤</h2>
+      <ol class="step-list">
+        <li>启动 STM32CubeMX，选择 <strong>File → New Project → MCU Selector</strong>。</li>
+        <li>搜索并选择 <strong>STM32F103C8Tx</strong>，封装为 LQFP48。</li>
+        <li>在 Pinout 视图中点击 <strong>PC13</strong>，选择 <strong>GPIO_Output</strong>。</li>
+        <li>进入 <strong>System Core → SYS</strong>，将 Debug 设置为 <strong>Serial Wire</strong>，保留 PA13 和 PA14 作为 SWD 引脚。</li>
+        <li>进入 <strong>System Core → GPIO</strong>，确认 PC13 为 Output Push Pull、No pull-up and no pull-down、Low output speed。</li>
+        <li>进入 <strong>System Core → RCC</strong>，将 High Speed Clock（HSE）设置为 <strong>Crystal/Ceramic Resonator</strong>。</li>
+        <li>进入 <strong>Clock Configuration</strong>：选择 HSE 作为 PLL 时钟源，将 PLL 倍频设置为 <strong>×9</strong>，系统时钟配置为 <strong>72 MHz</strong>；APB1 分频设为 ÷2（36 MHz），APB2 保持 ÷1（72 MHz）。</li>
+        <li>在 Project Manager 中设置工程名 <strong>Car_STM32F1_HAL</strong>，Toolchain/IDE 选择 <strong>MDK-ARM V5</strong>。</li>
+        <li>勾选 <strong>Keep User Code when re-generating</strong>，点击 Generate Code 生成工程。</li>
+      </ol>
+      <div class="tip"><strong>时钟配置结果：</strong>参考工程使用 8 MHz 外部晶振，经 PLL×9 得到 72 MHz SYSCLK；AHB 为 72 MHz、APB1 为 36 MHz、APB2 为 72 MHz。若开发板没有外部晶振，应改用 HSI 配置，否则程序可能停在 <code>Error_Handler()</code>。</div>
+    </section>
+
+    <section id="code">
+      <h2>5. 程序编写位置与关键代码</h2>
+      <p>打开 <code>Core/Src/main.c</code>。CubeMX 已在初始化阶段调用 <code>MX_GPIO_Init()</code>，因此只需要在主循环的用户代码区加入 LED 翻转和延时。</p>
+
+      <h3>5.1 GPIO 初始化代码</h3>
+      <p class="muted">以下代码由 CubeMX 自动生成，位于 <code>Core/Src/gpio.c</code>：</p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" onclick="copyCode(this)">复制</button>
+        <pre><code>void MX_GPIO_Init(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
+
+  GPIO_InitStruct.Pin = GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &amp;GPIO_InitStruct);
+}</code></pre>
+      </div>
+
+      <h3>5.2 主循环代码</h3>
+      <p class="muted">将代码写在 <code>/* USER CODE BEGIN 3 */</code> 保护区内，避免重新生成工程时被覆盖：</p>
+      <div class="code-wrap">
+        <button class="copy-btn" type="button" onclick="copyCode(this)">复制</button>
+        <pre><code>/* Infinite loop */
+/* USER CODE BEGIN WHILE */
+while (1)
+{
+  /* USER CODE END WHILE */
+
+  /* USER CODE BEGIN 3 */
+  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+  HAL_Delay(500);
+}
+/* USER CODE END 3 */</code></pre>
+      </div>
+
+      <div class="tip"><strong>代码说明：</strong><code>HAL_GPIO_TogglePin()</code> 每执行一次就翻转 PC13 输出电平；<code>HAL_Delay(500)</code> 延时 500 ms。LED 每 0.5 秒切换一次状态，因此一个完整亮灭周期约为 1 秒。</div>
+      <div class="success"><strong>代码位置已核对：</strong>修改后的参考工程已将两条 LED 语句放入 <code>USER CODE BEGIN 3</code> 保护区，重新用 CubeMX 生成代码时可保留这部分用户程序。</div>
+    </section>
+
+    <section id="build">
+      <h2>6. 编译和下载步骤</h2>
+      <ol class="step-list">
+        <li>进入工程的 <code>MDK-ARM</code> 文件夹，双击 <code>Car_STM32F1_HAL.uvprojx</code>。</li>
+        <li>在 Keil 中确认目标芯片为 <strong>STM32F103C8</strong>，并确认已安装 STM32F1xx Device Family Pack。</li>
+        <li>点击 <strong>Rebuild</strong> 或按 <strong>F7</strong> 编译；输出窗口应显示 <code>0 Error(s), 0 Warning(s)</code>。</li>
+        <li>连接 ST-Link：SWDIO→PA13、SWCLK→PA14、GND→GND，并为目标板提供正确的 3.3V 电源。</li>
+        <li>打开 <strong>Options for Target → Debug</strong>，选择 <strong>ST-Link Debugger</strong>。</li>
+        <li>在 <strong>Utilities</strong> 中选择使用 ST-Link 下载，并确认 Flash Programming Algorithm 包含 STM32F10x 对应算法。</li>
+        <li>点击 <strong>Download</strong> 或按 <strong>F8</strong>，等待显示 Programming Done / Verify OK。</li>
+        <li>复位开发板，观察 PC13 板载 LED。</li>
+      </ol>
+      <div class="success"><strong>参考工程验证结果：</strong>修改后的工程已于 2026-11-18 使用 Keil µVision 5.36、Arm Compiler 5.06 update 7 构建成功，结果为 0 错误、0 警告，并已生成最新 HEX 文件。</div>
+    </section>
+
+    <section id="result">
+      <h2>7. 预期实验现象</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>正常现象</h3>
+          <p>程序下载并复位后，PC13 对应的板载 LED 以约 500 ms 的间隔交替亮、灭，即约每秒完成一个完整闪烁周期。</p>
+        </div>
+        <div class="card">
+          <h3>观察记录</h3>
+          <p>将 <code>HAL_Delay(500)</code> 分别改为 100、1000 和 2000，重新编译下载，比较不同延时时间下的闪烁速度。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="troubleshooting">
+      <h2>8. 常见问题与排查</h2>
+      <details>
+        <summary>LED 一直不亮</summary>
+        <div class="answer"><p>先确认 LED 是否真的连接到 PC13，再检查开发板供电、GND 共地和程序是否成功下载。部分开发板的 LED 连接在其他引脚，应修改 CubeMX 和代码。</p></div>
+      </details>
+      <details>
+        <summary>LED 一直亮、不闪烁</summary>
+        <div class="answer"><p>检查主循环内是否同时包含 <code>HAL_GPIO_TogglePin()</code> 和 <code>HAL_Delay()</code>；确认程序已重新编译、下载，并且下载的是当前工程生成的新文件。</p></div>
+      </details>
+      <details>
+        <summary>Keil 提示 Target not found 或无法连接 ST-Link</summary>
+        <div class="answer"><p>依次检查 ST-Link 驱动、SWDIO/SWCLK 接线、3.3V 供电和公共地；在 Debug Settings 中尝试降低 SWD Clock。若程序关闭了调试口，可按住复位键连接后再释放。</p></div>
+      </details>
+      <details>
+        <summary>编译提示缺少设备包或头文件</summary>
+        <div class="answer"><p>安装 Keil STM32F1xx Device Family Pack，并确认工程 Include Paths 中包含 Core/Inc、HAL Driver 和 CMSIS 目录。参考工程使用 Keil.STM32F1xx_DFP 2.4.1。</p></div>
+      </details>
+      <details>
+        <summary>重新用 CubeMX 生成代码后，点灯程序消失</summary>
+        <div class="answer"><p>自定义代码必须写在 <code>USER CODE BEGIN</code> 与 <code>USER CODE END</code> 之间。本实验建议放在主循环的 <code>USER CODE BEGIN 3</code> 区域。</p></div>
+      </details>
+      <details>
+        <summary>LED 的亮灭逻辑与预期相反</summary>
+        <div class="answer"><p>这是低电平点亮电路的正常现象。需要固定控制时，可使用 <code>GPIO_PIN_RESET</code> 点亮、<code>GPIO_PIN_SET</code> 熄灭；使用 Toggle 时只关注闪烁即可。</p></div>
+      </details>
+    </section>
+
+    <section id="challenge">
+      <h2>9. 提高任务</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>任务 A：改变闪烁频率</h3>
+          <p>修改延时时间，实现快速闪烁、慢速闪烁和“短亮长灭”的节奏效果，并记录各阶段持续时间。</p>
+        </div>
+        <div class="card">
+          <h3>任务 B：三色流水灯</h3>
+          <p>增加三个外接 LED，建议使用普通 GPIO 引脚并分别串联限流电阻，编写红、绿、蓝依次点亮的流水灯程序。</p>
+        </div>
+        <div class="card">
+          <h3>任务 C：按键控制 LED</h3>
+          <p>增加一个 GPIO 输入引脚，读取按键状态，实现按下一次切换一次 LED 状态，并思考按键消抖问题。</p>
+        </div>
+        <div class="card">
+          <h3>任务 D：PWM 呼吸灯</h3>
+          <p>将 LED 改接到支持定时器 PWM 输出的引脚，通过逐步改变占空比实现亮度渐变。PC13 不适合作为硬件 PWM 输出。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="download">
+      <h2>10. 工程下载、版本和更新时间</h2>
+      <div class="download-box">
+        <div>
+          <h3>STM32_LED 教学工程</h3>
+          <p class="muted">STM32F103C8T6 · HAL 库 · Keil MDK · PC13 板载 LED</p>
+          <p><strong>版本：</strong>v1.1.0　<strong>页面更新：</strong>2026-11-18　<strong>参考工程日期：</strong>2026-11-18</p>
+        </div>
+        <a class="button" href="../../resources/embedded-minor/examples/STM32_LED-v1.1.0.zip" download>⬇ 下载工程</a>
+      </div>
+      <div class="tip"><strong>发布建议：</strong>小型教学工程可以放在网站的 <code>resources</code> 目录中；如果后续工程较多或文件较大，建议改用 GitHub Releases，并在这里替换为对应版本的下载地址。</div>
+    </section>
+
+    <section id="references">
+      <h2>11. 参考资料与来源声明</h2>
+      <ul class="source-list">
+        <li>本页程序内容依据教师本地工程 <code>STM32_LED</code> 整理，核心文件包括 <code>Car_STM32F1_HAL.ioc</code>、<code>Core/Src/gpio.c</code> 和 <code>Core/Src/main.c</code>。</li>
+        <li>页面结构参考波特律动的 <a href="https://docs.baud-dance.com/docs/stm32/example/GPIO_ledMaster/" target="_blank" rel="noopener">《GPIO 点灯大师》</a>，教学文字、代码说明和排查内容结合本课程工程重新编写。</li>
+        <li>STM32 HAL 驱动、CMSIS 及相关芯片资料的版权归 STMicroelectronics、Arm 等原权利人所有，请遵循工程目录中的许可证。</li>
+        <li>本页面用于课程教学和实验指导。转载或二次使用时请保留来源说明，并核对所使用开发板的芯片、引脚与电气连接。</li>
+      </ul>
+    </section>
+
+    <footer>
+      凤儿老师的教学资源中心<br>
+      嵌入式微专业 · STM32 GPIO 基础实验
+    </footer>
+  </main>
+
+  <script>
+    const sidebar = document.getElementById("sidebar");
+    const menuButton = document.querySelector(".menu-btn");
+    const navLinks = [...document.querySelectorAll(".nav-link")];
+
+    function toggleMenu() {
+      const isOpen = sidebar.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        sidebar.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const sections = document.querySelectorAll("main section[id]");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(link => {
+          link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`);
+        });
+      });
+    }, { rootMargin: "-20% 0px -70% 0px" });
+    sections.forEach(section => observer.observe(section));
+
+    async function copyCode(button) {
+      const text = button.nextElementSibling.innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+        button.textContent = "已复制";
+        setTimeout(() => button.textContent = "复制", 1400);
+      } catch {
+        button.textContent = "请手动复制";
+      }
+    }
+  </script>
+</body>
+</html>
