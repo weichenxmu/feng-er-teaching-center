@@ -29,6 +29,106 @@ body{
   border-radius: 12px;
 }
 
+/* STM32技术文档列表 */
+.document-list {
+  margin-top: 12px;
+  border-top: 1px solid #edf0f4;
+}
+
+.document-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 13px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.document-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.document-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.document-info strong {
+  display: block;
+  font-size: 13px;
+  color: #334155;
+  line-height: 1.6;
+}
+
+.document-info small {
+  display: block;
+  color: #94a3b8;
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.document-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.document-actions a,
+.preview,
+.download {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.document-actions a,
+.preview {
+  color: #3974b8;
+  background: #eff6ff;
+}
+
+.document-actions a:hover,
+.preview:hover {
+  background: #dbeafe;
+}
+
+.document-actions a:last-child,
+.download {
+  color: #fff;
+  background: #3974b8;
+}
+
+.document-actions a:last-child:hover,
+.download:hover {
+  background: #285d99;
+}
+
+/* 现有模块的预览和下载按钮 */
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+/* 移动端文档列表 */
+@media(max-width:500px) {
+  .document-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .document-actions {
+    margin-left: 30px;
+  }
+}
+
 .tips {
   margin-top: 28px;
   padding: 20px;
@@ -339,17 +439,111 @@ footer{
 
   <div class="grid">
 
-    <!-- STM32主控板 -->
-    <div class="card">
-      <div class="file-icon">📘</div>
-      <h3>STM32 主控板</h3>
-      <p>
-        STM32 核心板技术资料，了解微控制器引脚定义、
-        GPIO、定时器、串口及外设接口配置。
-      </p>
-      <div class="category">主控模块</div>
-      <span class="pending">资料整理中</span>
+   
+<!-- STM32主控板 -->
+<div class="card">
+  <div class="file-icon">📘</div>
+
+  <h3>STM32 主控板</h3>
+
+  <p>
+    STM32 核心板技术资料，包含芯片资源、
+    引脚定义、开发板原理图及接口说明，
+    帮助学生理解主控系统的硬件组成。
+  </p>
+
+  <div class="category">主控模块</div>
+
+  <div class="document-list">
+
+    <!-- 文档1 -->
+    <div class="document-item">
+      <div class="document-info">
+        <span class="document-icon">📄</span>
+        <div>
+          <strong>STM32技术文档1</strong>
+          <small>文档用途说明</small>
+        </div>
+      </div>
+      <div class="document-actions">
+        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名1.pdf"
+           target="_blank" rel="noopener">预览</a>
+        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名1.pdf"
+           download>下载</a>
+      </div>
     </div>
+
+    <!-- 文档2 -->
+    <div class="document-item">
+      <div class="document-info">
+        <span class="document-icon">📄</span>
+        <div>
+          <strong>STM32技术文档2</strong>
+          <small>文档用途说明</small>
+        </div>
+      </div>
+      <div class="document-actions">
+        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名2.pdf"
+           target="_blank" rel="noopener">预览</a>
+        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名2.pdf"
+           download>下载</a>
+      </div>
+    </div>
+
+    <!-- 文档3 -->
+    <div class="document-item">
+      <div class="document-info">
+        <span class="document-icon">📄</span>
+        <div>
+          <strong>STM32技术文档3</strong>
+          <small>文档用途说明</small>
+        </div>
+      </div>
+      <div class="document-actions">
+        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名3.pdf"
+           target="_blank" rel="noopener">预览</a>
+        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名3.pdf"
+           download>下载</a>
+      </div>
+    </div>
+
+    <!-- 文档4 -->
+    <div class="document-item">
+      <div class="document-info">
+        <span class="document-icon">📄</span>
+        <div>
+          <strong>STM32技术文档4</strong>
+          <small>文档用途说明</small>
+        </div>
+      </div>
+      <div class="document-actions">
+        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名4.pdf"
+           target="_blank" rel="noopener">预览</a>
+        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名4.pdf"
+           download>下载</a>
+      </div>
+    </div>
+
+    <!-- 文档5 -->
+    <div class="document-item">
+      <div class="document-info">
+        <span class="document-icon">📄</span>
+        <div>
+          <strong>STM32技术文档5</strong>
+          <small>文档用途说明</small>
+        </div>
+      </div>
+      <div class="document-actions">
+        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名5.pdf"
+           target="_blank" rel="noopener">预览</a>
+        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名5.pdf"
+           download>下载</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
     <!-- 电机驱动模块 -->
     <div class="card">
