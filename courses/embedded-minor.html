@@ -286,41 +286,112 @@ footer{
 
 
 
+
 <section id="hardware">
- <h2>2.硬件模块资料</h2>
- <p class="desc">整理STM32蓝牙小车涉及的硬件资料，帮助学生理解系统组成和电路连接。</p>
- <div class="grid">
-  <div class="card">
-   <h3>STM32主控板</h3>
-   <p>主控板原理图、引脚定义、接口说明。</p>
-   <span class="pending">待上传</span>
+  <h2>2. 硬件模块资料库</h2>
+  <p class="desc">
+    整理 STM32 蓝牙小车涉及的核心硬件模块资料，
+    包括主控板、电机驱动、蓝牙通信和 OLED 显示模块，
+    帮助学生理解系统组成、器件功能及电路连接。
+  </p>
+
+  <div class="grid">
+
+    <!-- STM32主控板 -->
+    <div class="card">
+      <div class="file-icon">📘</div>
+      <h3>STM32 主控板</h3>
+      <p>
+        STM32 核心板技术资料，了解微控制器引脚定义、
+        GPIO、定时器、串口及外设接口配置。
+      </p>
+      <div class="category">主控模块</div>
+      <span class="pending">资料整理中</span>
+    </div>
+
+    <!-- 电机驱动模块 -->
+    <div class="card">
+      <div class="file-icon">📕</div>
+      <h3>L298N 电机驱动模块</h3>
+      <p>
+        双路直流电机驱动模块资料，包含模块引脚定义、
+        驱动原理、电机接线及方向控制方法。
+      </p>
+      <div class="category">电机驱动</div>
+      <div class="actions">
+        <a class="preview"
+           href="../resources/embedded-minor/datasheets/L298N_data/L298N_module.pdf"
+           target="_blank" rel="noopener">
+          👁 在线预览
+        </a>
+        <a class="download"
+           href="../resources/embedded-minor/datasheets/L298N_data/L298N_module.pdf"
+           download>
+          ↓ 下载PDF
+        </a>
+      </div>
+    </div>
+
+    <!-- 蓝牙通信模块 -->
+    <div class="card">
+      <div class="file-icon">📕</div>
+      <h3>DX-BT24 蓝牙通信模块</h3>
+      <p>
+        蓝牙串口通信模块资料，包含模块引脚定义、
+        UART 串口连接、通信参数及数据收发说明。
+      </p>
+      <div class="category">无线通信</div>
+      <div class="actions">
+        <a class="preview"
+           href="../resources/embedded-minor/datasheets/DX_BT24_data/MD0503_DX_BT24_module.pdf"
+           target="_blank" rel="noopener">
+          👁 在线预览
+        </a>
+        <a class="download"
+           href="../resources/embedded-minor/datasheets/DX_BT24_data/MD0503_DX_BT24_module.pdf"
+           download>
+          ↓ 下载PDF
+        </a>
+      </div>
+    </div>
+
+    <!-- OLED显示模块 -->
+    <div class="card">
+      <div class="file-icon">📕</div>
+      <h3>OLED 显示模块</h3>
+      <p>
+        OLED 显示屏技术资料，包含模块接口定义、
+        供电要求、I²C/SPI 通信及显示控制说明。
+      </p>
+      <div class="category">显示模块</div>
+      <div class="actions">
+        <a class="preview"
+           href="../resources/embedded-minor/datasheets/OLED_data/OLED_module.pdf"
+           target="_blank" rel="noopener">
+          👁 在线预览
+        </a>
+        <a class="download"
+           href="../resources/embedded-minor/datasheets/OLED_data/OLED_module.pdf"
+           download>
+          ↓ 下载PDF
+        </a>
+      </div>
+    </div>
+
   </div>
-  <div class="card">
-   <h3>电机驱动模块</h3>
-   <p>驱动电路、接线方式、电机接口说明。</p>
-     <div class="actions">
-    <a class="preview" href="../resources/embedded-minor/datasheets/L298N_data/L298N_module.pdf" target="_blank" rel="noopener">👁 在线预览</a>
-    <a class="download" href="../resources/embedded-minor/datasheets/L298N_data/L298N_module.pdf" download>↓ 下载PDF</a>
+
+  <div class="tips">
+    <h3>📖 资料使用说明</h3>
+    <ol>
+      <li>点击「在线预览」可直接在浏览器中查看PDF资料。</li>
+      <li>点击「下载PDF」可将模块技术资料保存到本地。</li>
+      <li>进行硬件连接时，重点查阅模块引脚定义、供电要求及接口说明。</li>
+      <li>进行系统设计时，结合STM32主控板理解各模块之间的连接关系。</li>
+    </ol>
   </div>
-  </div>
-  <div class="card">
-   <h3>蓝牙通信模块</h3>
-   <p>蓝牙模块引脚、串口连接及通信说明。</p>
-    <div class="actions">
-    <a class="preview" href="../resources/embedded-minor/datasheets/DX_BT24_data/MD0503_DX_BT24_module.pdf" target="_blank" rel="noopener">👁 在线预览</a>
-    <a class="download" href="../resources/embedded-minor/datasheets/DX_BT24_data/MD0503_DX_BT24_module.pdf" download>↓ 下载PDF</a>
-  </div>
-  </div>
-  
-  <div class="card">
-   <h3>OLED显示模块</h3>
-   <p>显示屏接口定义、供电及通信连接。</p>
-    <div class="actions">
-    <a class="preview" href="../resources/embedded-minor/datasheets/OLED_data/OLED_module.pdf" target="_blank" rel="noopener">👁 在线预览</a>
-    <a class="download" href="../resources/embedded-minor/datasheets/OLED_data/OLED_module.pdf" download>↓ 下载PDF</a>
-  </div>
-  </div>
+
 </section>
+
 
 <!-- 例程 -->
 
