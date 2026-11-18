@@ -29,6 +29,56 @@ body{
   border-radius: 12px;
 }
 
+ 
+/* 技术文档折叠区域 */
+.document-details {
+  margin-top: 12px;
+  border-top: 1px solid #edf0f4;
+}
+
+.document-details summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 5px;
+  cursor: pointer;
+  list-style: none;
+  color: #3974b8;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.document-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.document-details summary::after {
+  content: "＋";
+  font-size: 17px;
+  margin-left: 8px;
+}
+
+.document-details[open] summary::after {
+  content: "－";
+}
+
+.document-details .toggle-text {
+  margin-left: auto;
+  margin-right: 8px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.document-details[open] .toggle-text {
+  font-size: 0;
+}
+
+.document-details[open] .toggle-text::after {
+  content: "点击收起";
+  font-size: 12px;
+}
+
+
 /* STM32技术文档列表 */
 .document-list {
   margin-top: 12px;
@@ -440,6 +490,7 @@ footer{
   <div class="grid">
 
    
+
 <!-- STM32主控板 -->
 <div class="card">
   <div class="file-icon">📘</div>
@@ -454,94 +505,66 @@ footer{
 
   <div class="category">主控模块</div>
 
-  <div class="document-list">
+  <details class="document-details">
+    <summary>
+      <span>📚 技术文档（5份）</span>
+      <span class="toggle-text">点击展开</span>
+    </summary>
 
-    <!-- 文档1 -->
-    <div class="document-item">
-      <div class="document-info">
-        <span class="document-icon">📄</span>
-        <div>
-          <strong>STM32技术文档1</strong>
-          <small>文档用途说明</small>
+    <div class="document-list">
+
+      <div class="document-item">
+        <span>STM32最小系统原理图</span>
+        <div class="document-actions">
+          <a href="../resources/embedded-minor/datasheets/STM32_data/STM32F103C8T6_board.pdf"
+             target="_blank" rel="noopener">预览</a>
+          <a href="../resources/embedded-minor/datasheets/STM32_data/STM32F103C8T6_board.pdf"
+             download>下载</a>
         </div>
       </div>
-      <div class="document-actions">
-        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名1.pdf"
-           target="_blank" rel="noopener">预览</a>
-        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名1.pdf"
-           download>下载</a>
-      </div>
-    </div>
 
-    <!-- 文档2 -->
-    <div class="document-item">
-      <div class="document-info">
-        <span class="document-icon">📄</span>
-        <div>
-          <strong>STM32技术文档2</strong>
-          <small>文档用途说明</small>
+      <div class="document-item">
+        <span>STM32数据手册中文版</span>
+        <div class="document-actions">
+          <a href="../resources/embedded-minor/datasheets/STM32_data/STM32F103x8B_DS_CH_V10.pdf"
+             target="_blank" rel="noopener">预览</a>
+          <a href="../resources/embedded-minor/datasheets/STM32_data/STM32F103x8B_DS_CH_V10.pdf"
+             download>下载</a>
         </div>
       </div>
-      <div class="document-actions">
-        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名2.pdf"
-           target="_blank" rel="noopener">预览</a>
-        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名2.pdf"
-           download>下载</a>
-      </div>
-    </div>
 
-    <!-- 文档3 -->
-    <div class="document-item">
-      <div class="document-info">
-        <span class="document-icon">📄</span>
-        <div>
-          <strong>STM32技术文档3</strong>
-          <small>文档用途说明</small>
+      <div class="document-item">
+        <span>STM32数据手册英文版</span>
+        <div class="document-actions">
+          <a href="../resources/embedded-minor/datasheets/STM32_data/STM32F103x8B_DS_EN.pdf"
+             target="_blank" rel="noopener">预览</a>
+          <a href="../resources/embedded-minor/datasheets/STM32_data/STM32F103x8B_DS_EN.pdf"
+             download>下载</a>
         </div>
       </div>
-      <div class="document-actions">
-        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名3.pdf"
-           target="_blank" rel="noopener">预览</a>
-        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名3.pdf"
-           download>下载</a>
-      </div>
-    </div>
 
-    <!-- 文档4 -->
-    <div class="document-item">
-      <div class="document-info">
-        <span class="document-icon">📄</span>
-        <div>
-          <strong>STM32技术文档4</strong>
-          <small>文档用途说明</small>
+      <div class="document-item">
+        <span>STM32用户指南</span>
+        <div class="document-actions">
+          <a href="../resources/embedded-minor/datasheets/STM32_data/rm0008-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf"
+             target="_blank" rel="noopener">预览</a>
+          <a href="../resources/embedded-minor/datasheets/STM32_data/rm0008-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf"
+             download>下载</a>
         </div>
       </div>
-      <div class="document-actions">
-        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名4.pdf"
-           target="_blank" rel="noopener">预览</a>
-        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名4.pdf"
-           download>下载</a>
-      </div>
-    </div>
 
-    <!-- 文档5 -->
-    <div class="document-item">
-      <div class="document-info">
-        <span class="document-icon">📄</span>
-        <div>
-          <strong>STM32技术文档5</strong>
-          <small>文档用途说明</small>
+      <div class="document-item">
+        <span>STM32技术文档5</span>
+        <div class="document-actions">
+          <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名5.pdf"
+             target="_blank" rel="noopener">预览</a>
+          <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名5.pdf"
+             download>下载</a>
         </div>
       </div>
-      <div class="document-actions">
-        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名5.pdf"
-           target="_blank" rel="noopener">预览</a>
-        <a href="../resources/embedded-minor/datasheets/STM32_data/实际文件名5.pdf"
-           download>下载</a>
-      </div>
-    </div>
 
-  </div>
+    </div>
+  </details>
 </div>
 
 
